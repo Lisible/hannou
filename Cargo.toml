@@ -5,3 +5,4 @@ authors = ["Clément SIBILLE <claymeuns@protonmail.com>"]
 edition = "2018"
 
 [dependencies]
+serenity = "0.5.13"
