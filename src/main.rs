@@ -16,6 +16,7 @@ fn main() {
         .configure(|c| c.prefix("h!"))
         .cmd("addrole", add_role));
 
+    println!("Client started!");
     if let Err(e) = client.start() {
         println!("An error occured while running the client: {:?}", e);
     }
