@@ -1,0 +1,5 @@
+FROM rust:1.33-stretch
+COPY . /code
+WORKDIR /code
+RUN cargo build --release
+

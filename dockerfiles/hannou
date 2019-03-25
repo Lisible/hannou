@@ -1,0 +1,9 @@
+FROM debian:stretch-slim
+RUN apt-get update
+RUN apt-get install -y libssl1.0.2 libssl1.1 ca-certificates
+ADD target/release/hannou /hannou/hannou
+RUN ln -s /usr/lib/x86_64-linux-gnu/libssl.so.1.0.2 /usr/lib/x86_64-linux-gnu/libssl.so.1.0.0
+WORKDIR /hannou/
+
+CMD ["./hannou"]
+

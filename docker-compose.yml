@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+    build:
+        build:
+            context: .
+            dockerfile: dockerfiles/build
+        volumes:
+            - .:/code
+    hannou:
+        build:
+            context: .
+            dockerfile: dockerfiles/hannou
+        environment:
+             DISCORD_TOKEN: "${DISCORD_TOKEN}"
+        restart: always 
