@@ -1,9 +1,14 @@
+FROM rust:1.33-stretch as builder
+WORKDIR /usr/src/app
+RUN USER=root cargo init
+COPY Cargo.toml .
+RUN cargo build --release
+COPY src src
+RUN cargo build --release
+
 FROM debian:stretch-slim
-RUN apt-get update
-RUN apt-get install -y libssl1.0.2 libssl1.1 ca-certificates
-ADD target/release/hannou /hannou/hannou
-RUN ln -s /usr/lib/x86_64-linux-gnu/libssl.so.1.0.2 /usr/lib/x86_64-linux-gnu/libssl.so.1.0.0
-WORKDIR /hannou/
-
-CMD ["./hannou"]
-
+RUN apt-get update && apt-get install -y \
+	openssl \
+	ca-certificates
+COPY --from=builder /usr/src/app/target/release/hannou /bin/
+CMD hannou

@@ -1,16 +1,27 @@
 version: '3'
 
 services:
-    build:
-        build:
-            context: .
-            dockerfile: dockerfiles/build
-        volumes:
-            - .:/code
     hannou:
         build:
             context: .
             dockerfile: dockerfiles/hannou
+        volumes:
+            - .:/code
         environment:
-             DISCORD_TOKEN: "${DISCORD_TOKEN}"
+            DISCORD_TOKEN: "${DISCORD_TOKEN}"
+        depends_on:
+            - hannou-db
         restart: always 
+        
+    hannou-db:
+        image: mariadb:10
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+
+    adminer:
+        image: adminer
+        restart: always
+        ports:
+            - 8080:8080
+
