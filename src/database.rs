@@ -22,8 +22,6 @@
 * SOFTWARE.
 */
 
-use serenity::model::misc::EmojiIdentifier;
-
 pub fn add_role(channel_id: u64,
                 message_id: u64,
                 emoji: String,
